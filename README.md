@@ -275,6 +275,7 @@ In this exercise we will configure S3 Block Public Access, an easy way to preven
 9. Click **Save**  
 
 ![](/images/block_public_access_2.png)  
+ 
 10. Type **confirm**  
 11. Click **Confirm**  
 12. Go to your SSH session, run the following command. The request should succeed since the default for an object ACL is private.  
