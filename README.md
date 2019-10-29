@@ -72,7 +72,8 @@ A new dialog box or tab on your browser should appear, providing you with a comm
 
     Leave Access Key and Secret Key blank, set the region to the region you deployed your CloudFormation template in , output format leave default.
 
-  ![](/images/aws_configure.png)
+  ![](/images/aws_configure.png)  
+
 2. Create a credentials file to be used by the AWS CLI.  This will allow you to switch between two different users easily.  
 
     $ cd ~/.aws  
@@ -99,7 +100,8 @@ aws_secret_access_key =
 13. Copy the Access key ID and Secret access key into the credentials file under User2.
 14. Compare you credentials file to the one below and ensure your formatting is the same.  
 
-  ![](/images/credentials.png)
+  ![](/images/credentials.png)  
+
 15. Save the file
 
 ## Exercise #1- Require HTTPS
@@ -273,22 +275,22 @@ In this exercise we will configure S3 Block Public Access, an easy way to preven
 
 ![](/images/block_public_access_2.png)
 10. Type **confirm**  
-11. Click **Confirm**
-12. Go to your SSH session, run the following command. The request should succeed since the default for an object ACL is private.
-  $ aws s3api put-object --key text01 --body textfile --profile user1 --bucket ${bucket}
+11. Click **Confirm**  
+12. Go to your SSH session, run the following command. The request should succeed since the default for an object ACL is private.  
+  $ aws s3api put-object --key text01 --body textfile --profile user1 --bucket ${bucket}  
 13. Run the following command, the request should fail as the bucket policy will restrict the public-read ACL.  
-  $ aws s3api put-object --key text01 --body textfile --acl public-read --profile user1 –bucket ${bucket}
-14. 1. From the AWS console, click  **Services**  and select  **S3.**
-15. Click the bucket name. (Copied from CloudFormation Outputs previously.)
-16. Click on the **Permissions** tab.
-17. Click **Block public access**
-18. Click **Edit**
-19. Uncheck **Block public access to buckets and objects granted through new access control lists (ACLs)**
-![](/images/block_public_access_3.png)
-20. Click **Save**  
-![](/images/block_public_access_2.png)
-10. Type **confirm**.
-11. Click **Confirm**.
+  $ aws s3api put-object --key text01 --body textfile --acl public-read --profile user1 –bucket ${bucket}  
+14. From the AWS console, click  **Services**  and select  **S3.**  
+15. Click the bucket name. (Copied from CloudFormation Outputs previously.)  
+16. Click on the **Permissions** tab.  
+17. Click **Block public access**  
+18. Click **Edit**  
+19. Uncheck **Block public access to buckets and objects granted through new access control lists (ACLs)**  
+![](/images/block_public_access_3.png)  
+20. Click **Save**   
+![](/images/block_public_access_2.png)  
+21. Type **confirm**.  
+22. Click **Confirm**.  
 
 ## Exercise #5- Restrict Access to a  S3 VPC Endpoint
 
