@@ -9,7 +9,7 @@ Errors or corrections? Contact [mburbey@amazon.com](mailto:mburbey@amazon.com).
 
 In this workshop you will use IAM, S3 Bucket Policies, S3 Block Public Access and AWS Config to demonstrate multiple strategies for securing a S3 Bucket.
 
-#### 1. Deploy AWS resources using CloudFormation
+## Deploy AWS resources using CloudFormation
 
 1. Click one of the launch links in the table below to deploy the resources using CloudFormation.  To avoid errors during deployment, select a region in which you have previously created AWS resources.
 
@@ -50,7 +50,7 @@ In this workshop you will use IAM, S3 Bucket Policies, S3 Block Public Access an
 
 **Note:** Instances that are launched as part of this CloudFormation template may be in the initializing state for few minutes.
 
-#### 2. Connect to the EC2 Instance using EC2 Instance Connect
+## Connect to the EC2 Instance using EC2 Instance Connect
 
 1. From the AWS console, click  **Services**  and select  **EC2.**
 2. Select  **Instances**  from the menu on the left.
