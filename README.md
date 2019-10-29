@@ -223,7 +223,7 @@ In this exercise we will create a S3 Bucket Policy that prevents users from assi
   $ aws s3api put-object --key text01 --body textfile --profile user1 --bucket ${bucket}
 9. Run the following command, the request will also succeed even though this isn’t the behavior we are expecting.
   $ aws s3api put-object --key text01 --body textfile --acl public-read --profile user1 –bucket ${bucket}  
-  
+
 **Note**  
 The current bucket policy allows ACLs that are private but doesn't DENY anything.  It is important to write policies that prevent actions, not allow it when trying to restrict actions against a bucket. The current bucket policy also allows Public access to the bucket unintentionally due to the principal being a wildcard.
 10. Remove the existing bucket policy. Copy the bucket policy below and paste into the Bucket Policy Editor.
@@ -274,7 +274,7 @@ In this exercise we will configure S3 Block Public Access, an easy way to preven
 
 9. Click **Save**  
 
-![](/images/block_public_access_2.png)
+![](/images/block_public_access_2.png)  
 10. Type **confirm**  
 11. Click **Confirm**  
 12. Go to your SSH session, run the following command. The request should succeed since the default for an object ACL is private.  
@@ -353,7 +353,7 @@ In this exercise we will configure a S3 VPC Endpoint and a bucket policy to limi
 28. Click **Bucket Policy**.
 29. Click **Delete**
 
-##  Exercise #6- Use AWS Config to Detect a Public BUCKET  
+##  Exercise #6- Use AWS Config to Detect a Public Bucket  
 
 1. From the AWS console, click  **Services**  and select  **Config.**
 2. If you haven't used AWS Config previously you will be brought to the Get started page.  If you have already used AWS Config jump to step 6.
