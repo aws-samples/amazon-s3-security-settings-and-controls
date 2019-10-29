@@ -184,7 +184,7 @@ In this exercise we will create a S3 Bucket Policy that requires data at rest en
 13. Click on the **Properties** tab.    
 14. Default Encryption for AES-256(SSE-S3) is enabled.  
 
-**Important Note**  
+**Note**  
 Bucket Policies are enforced based on how the request from the client is sent.  In this case the Bucket Policy denied the first attempt to PUT an object. Since Default Encryption is enabled the first attempt would have ended up encrypted anyway, however, Default Encryption doesn't override encryption flags.  For example, if Default Encryption is set to AWS-KMS and a request is sent with AES-256(SSE-S3) the request will be written as AES-256(SSE-S3).  Default Encryption behaves like a default not an override.  If a customer has a requirement that all objects have a certain type of encryption, then the only way to meet that requirement is with a bucket policy.
 
 ## Exercise #3- Block Public ACLs using Bucket Policy
@@ -222,8 +222,9 @@ In this exercise we will create a S3 Bucket Policy that prevents users from assi
 8. Go to your SSH session, run the following command. The request should succeed since the default for an object ACL is private.
   $ aws s3api put-object --key text01 --body textfile --profile user1 --bucket ${bucket}
 9. Run the following command, the request will also succeed even though this isn’t the behavior we are expecting.
-  $ aws s3api put-object --key text01 --body textfile --acl public-read --profile user1 –bucket ${bucket}
-**Important Note**  
+  $ aws s3api put-object --key text01 --body textfile --acl public-read --profile user1 –bucket ${bucket}  
+  
+**Note**  
 The current bucket policy allows ACLs that are private but doesn't DENY anything.  It is important to write policies that prevent actions, not allow it when trying to restrict actions against a bucket. The current bucket policy also allows Public access to the bucket unintentionally due to the principal being a wildcard.
 10. Remove the existing bucket policy. Copy the bucket policy below and paste into the Bucket Policy Editor.
 ```
