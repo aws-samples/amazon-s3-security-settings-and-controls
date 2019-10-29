@@ -171,18 +171,18 @@ In this exercise we will create a S3 Bucket Policy that requires data at rest en
 ```
 6. Replace BUCKET_NAME with the bucket name.  Sample bucket policy below.  
 
-  ![](/images/sse_s3_bucket_policy.png)  
-7. Click **Save**
-8. Go to your SSH session and create a small text file using the following command.
-  $ echo "123456789abcdefg" > textfile
-9. Attempt to PUT an object without encryption.
-  $ aws s3api put-object --key text01 --body textfile --profile user1 --bucket ${bucket}
-10. PUT an object using SSE-S3.
-  $  aws s3api put-object --key text01 --body textfile --server-side-encryption AES256 --profile user1 --bucket ${bucket}
-11. From the AWS console, click  **Services**  and select  **S3.**
-12. Click the bucket name. (Copied from CloudFormation Outputs previously.)
-13. Click on the **Properties** tab.  
-14. Default Encryption for AES-256(SSE-S3) is enabled.
+  ![](/images/sse_s3_bucket_policy.png)   
+7. Click **Save**  
+8. Go to your SSH session and create a small text file using the following command.  
+  $ echo "123456789abcdefg" > textfile  
+9. Attempt to PUT an object without encryption.  
+  $ aws s3api put-object --key text01 --body textfile --profile user1 --bucket ${bucket}  
+10. PUT an object using SSE-S3.  
+  $  aws s3api put-object --key text01 --body textfile --server-side-encryption AES256 --profile user1 --bucket ${bucket}  
+11. From the AWS console, click  **Services**  and select  **S3.**  
+12. Click the bucket name. (Copied from CloudFormation Outputs previously.)  
+13. Click on the **Properties** tab.    
+14. Default Encryption for AES-256(SSE-S3) is enabled.  
 
 **Important Note**  
 Bucket Policies are enforced based on how the request from the client is sent.  In this case the Bucket Policy denied the first attempt to PUT an object. Since Default Encryption is enabled the first attempt would have ended up encrypted anyway, however, Default Encryption doesn't override encryption flags.  For example, if Default Encryption is set to AWS-KMS and a request is sent with AES-256(SSE-S3) the request will be written as AES-256(SSE-S3).  Default Encryption behaves like a default not an override.  If a customer has a requirement that all objects have a certain type of encryption, then the only way to meet that requirement is with a bucket policy.
