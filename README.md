@@ -130,6 +130,7 @@ In this exercise we will create a S3 Bucket Policy that requires connections to 
   ]
 }
 ```
+
 6. Replace BUCKET_NAME with the bucket name.  Sample bucket policy below.
 
   ![](/images/https_bucket_policy.png)
@@ -137,11 +138,11 @@ In this exercise we will create a S3 Bucket Policy that requires connections to 
 7. Click **Save**
 8. In your SSH session run the following command. The command should return a 403 error since the endpoint-url is HTTP.
 
-  $ aws s3api head-object --key app1/file1 --endpoint-url http://s3.amazonaws.com --profile user1 --bucket ${bucket}
+  $ aws s3api --endpoint-url http://s3.amazonaws.com --profile user1 head-object --key app1/file1 --bucket ${bucket}
 
 9. In your SSH session run the following command. This command should succeed since it is using HTTPS.
 
-  $ aws s3api head-object --key app1/file1 --endpoint-url https://s3.amazonaws.com --profile user1 --bucket ${bucket}
+  $ aws s3api --endpoint-url https://s3.amazonaws.com --profile user1 head-object --key app1/file1 --bucket ${bucket}
 
 ## Exercise #2- Require SSE-S3 Encryption
 
@@ -151,7 +152,8 @@ In this exercise we will create a S3 Bucket Policy that requires data at rest en
 2. Click the bucket name. (Copied from CloudFormation Outputs previously.)
 3. Click on the **Permissions** tab.  
 4. Click **Bucket Policy**.  
-5. Copy the bucket policy below and paste into the Bucket Policy Editor.
+5. Click **Delete**, click **Delete** to confirm.  
+6. Copy the bucket policy below and paste into the Bucket Policy Editor.
 ```
 {
     "Statement": [
@@ -169,20 +171,21 @@ In this exercise we will create a S3 Bucket Policy that requires data at rest en
     ]
 }
 ```
-6. Replace BUCKET_NAME with the bucket name.  Sample bucket policy below.  
+7. Replace BUCKET_NAME with the bucket name.  Sample bucket policy below.  
 
   ![](/images/sse_s3_bucket_policy.png)   
-7. Click **Save**  
-8. Go to your SSH session and create a small text file using the following command.  
+8. Click **Save**  
+9. Go to your SSH session and create a small text file using the following command.
+   $ cd ~  
   $ echo "123456789abcdefg" > textfile  
-9. Attempt to PUT an object without encryption.  
+10. Attempt to PUT an object without encryption. The request should fail.
   $ aws s3api put-object --key text01 --body textfile --profile user1 --bucket ${bucket}  
-10. PUT an object using SSE-S3.  
+11. PUT an object using SSE-S3.  The request should succeed.
   $  aws s3api put-object --key text01 --body textfile --server-side-encryption AES256 --profile user1 --bucket ${bucket}  
-11. From the AWS console, click  **Services**  and select  **S3.**  
-12. Click the bucket name. (Copied from CloudFormation Outputs previously.)  
-13. Click on the **Properties** tab.    
-14. Default Encryption for AES-256(SSE-S3) is enabled.  
+12. From the AWS console, click  **Services**  and select  **S3.**  
+13. Click the bucket name. (Copied from CloudFormation Outputs previously.)  
+14. Click on the **Properties** tab.    
+15. Default Encryption for AES-256(SSE-S3) is enabled.  
 
 **Note**  
 Bucket Policies are enforced based on how the request from the client is sent.  In this case the Bucket Policy denied the first attempt to PUT an object. Since Default Encryption is enabled the first attempt would have ended up encrypted anyway, however, Default Encryption doesn't override encryption flags.  For example, if Default Encryption is set to AWS-KMS and a request is sent with AES-256(SSE-S3) the request will be written as AES-256(SSE-S3).  Default Encryption behaves like a default not an override.  If a customer has a requirement that all objects have a certain type of encryption, then the only way to meet that requirement is with a bucket policy.
@@ -195,7 +198,8 @@ In this exercise we will create a S3 Bucket Policy that prevents users from assi
 2. Click the bucket name. (Copied from CloudFormation Outputs previously.)
 3. Click on the **Permissions** tab.  
 4. Click **Bucket Policy**.  
-5. Copy the bucket policy below and paste into the Bucket Policy Editor.
+5. Click **Delete**, click **Delete** to confirm.  
+6. Copy the bucket policy below and paste into the Bucket Policy Editor.
 ```
 {
     "Statement": [
@@ -216,16 +220,17 @@ In this exercise we will create a S3 Bucket Policy that prevents users from assi
     ]
 }
 ```
-6. Replace BUCKET NAME with the bucket name.  Sample bucket policy below.
+7. Replace BUCKET NAME with the bucket name.  Sample bucket policy below.
   ![](/images/block_public_acl_1.png)
-7. Click **Save**
-8. Go to your SSH session, run the following command. The request should succeed since the default for an object ACL is private.
-  $ aws s3api put-object --key text01 --body textfile --profile user1 --bucket ${bucket}
-9. Run the following command, the request will also succeed even though this isn’t the behavior we are expecting.
-  $ aws s3api put-object --key text01 --body textfile --acl public-read --profile user1 –bucket ${bucket}  
+8. Click **Save**  
+9. Go to your SSH session, run the following command. The request should succeed since the default for an object ACL is private.  
+  $ aws s3api put-object --key text01 --body textfile --profile user1 --bucket ${bucket}  
+10. Run the following command, the request will also succeed even though this isn’t the behavior we are expecting.  
+  $ aws s3api put-object --key text01 --body textfile --acl public-read --profile user1 --bucket ${bucket}  
 
 **Note**  
-The current bucket policy allows ACLs that are private but doesn't DENY anything.  It is important to write policies that prevent actions, not allow it when trying to restrict actions against a bucket. The current bucket policy also allows Public access to the bucket unintentionally due to the principal being a wildcard.
+The current bucket policy allows ACLs that are private but doesn't DENY anything.  It is important to write policies that prevent actions, not allow it when trying to restrict actions against a bucket. The current bucket policy also allows Public access to the bucket unintentionally due to the principal being a wildcard.  
+
 10. Remove the existing bucket policy. Copy the bucket policy below and paste into the Bucket Policy Editor.
 ```
 {
@@ -256,8 +261,8 @@ The current bucket policy allows ACLs that are private but doesn't DENY anything
 12. Click **Save**
 13. Go to your SSH session, run the following command. Replace BUCKET_NAME with your bucket name.  The request should succeed since the default for an object ACL is private.  
   $ aws s3api put-object --key text01 --body textfile --profile user1 --bucket ${bucket}
-14. Run the following command, the request should fail as the bucket policy will restrict the public-read ACL.
-  $ aws s3api put-object --key text01 --body textfile --acl public-read --profile user1 –bucket ${bucket}
+14. Run the following command, the request should fail as the bucket policy will restrict the public-read ACL.  
+  $ aws s3api put-object --key text01 --body textfile --acl public-read --profile user1 –-bucket ${bucket}
 
 ## Exercise #4- Configure S3 Block Public Access
 In this exercise we will configure S3 Block Public Access, an easy way to prevent public access to your bucket.
@@ -266,7 +271,7 @@ In this exercise we will configure S3 Block Public Access, an easy way to preven
 2. Click the bucket name. (Copied from CloudFormation Outputs previously.)
 3. Click on the **Permissions** tab.  
 4. Click **Bucket Policy**.  
-5. Click **Delete**
+5. Click **Delete**, click **Delete** to confirm.  
 6. Click **Block public access**
 7. Click **Edit**
 8. Select **Block public access to buckets and objects granted through new access control lists (ACLs)**
@@ -275,13 +280,13 @@ In this exercise we will configure S3 Block Public Access, an easy way to preven
 9. Click **Save**  
 
 ![](/images/block_public_access_2.png)  
- 
+
 10. Type **confirm**  
 11. Click **Confirm**  
 12. Go to your SSH session, run the following command. The request should succeed since the default for an object ACL is private.  
   $ aws s3api put-object --key text01 --body textfile --profile user1 --bucket ${bucket}  
 13. Run the following command, the request should fail as the bucket policy will restrict the public-read ACL.  
-  $ aws s3api put-object --key text01 --body textfile --acl public-read --profile user1 –bucket ${bucket}  
+  $ aws s3api put-object --key text01 --body textfile --acl public-read --profile user1 –-bucket ${bucket}  
 14. From the AWS console, click  **Services**  and select  **S3.**  
 15. Click the bucket name. (Copied from CloudFormation Outputs previously.)  
 16. Click on the **Permissions** tab.  
@@ -352,44 +357,46 @@ In this exercise we will configure a S3 VPC Endpoint and a bucket policy to limi
 26. Click the bucket name. (Copied from CloudFormation Outputs previously.)
 27. Click on the **Permissions** tab.  
 28. Click **Bucket Policy**.
-29. Click **Delete**
+29. Click **Delete**, click **Delete** to confirm.
 
 ##  Exercise #6- Use AWS Config to Detect a Public Bucket  
 
 1. From the AWS console, click  **Services**  and select  **Config.**
 2. If you haven't used AWS Config previously you will be brought to the Get started page.  If you have already used AWS Config jump to step 6.
 ![](/images/config_4.png)
-3. Click **Next**.
-4. Click **Skip**.  
-5. Click **Confirm**.      
-6. Click **Rules**.  
-7. Click **Add Rule**.
-8. Filter rules by typing **S3** into search box.  
-9. Click **s3_bucket_public_write_prohibited**.
-10. Click **Save**.
-11. The rule needs time to evaluate.  Refresh the page until you see **Compliant**.  
+3. Go to bottom of page, under AWS Config role, select **Use an existing AWS Config service-linked role**.  
+![](/images/config_6.png)
+4. Click **Next**.
+5. Click **Skip**.  
+6. Click **Confirm**.      
+7. Click **Rules**.  
+8. Click **Add Rule**.
+9. Filter rules by typing **S3** into search box.  
+10. Click **s3_bucket_public_write_prohibited**.
+11. Click **Save**.
+12. The rule needs time to evaluate.  Refresh the page until you see **Compliant**.  
 ![](/images/config_5.png)
-12. From the AWS console, click  **Services**  and select  **S3.**
-13. Click the bucket name. (Copied from CloudFormation Outputs previously.)
-14. Click on the **Permissions** tab.
-15. Click on **Access Control List**.  
-16. Under Public access, select **Everyone**.  
-17. Check **Write objects** in the pop up window.
-18. Click **Save**.  
+13. From the AWS console, click  **Services**  and select  **S3.**
+14. Click the bucket name. (Copied from CloudFormation Outputs previously.)
+15. Click on the **Permissions** tab.
+16. Click on **Access Control List**.  
+17. Under Public access, select **Everyone**.  
+18. Check **Write objects** in the pop up window.
+19. Click **Save**.  
 ![](/images/config_2.png)  
-19. From the AWS console, click  **Services**  and select  **Config.**  
-20. Click **Rules**.  
-21. Click **s3_bucket_public_write_prohibited**.  
-22. Click **Re-evaluate**.   
-23. You will need to refresh the screen.  Your bucket should be **Noncompliant**.  
+20. From the AWS console, click  **Services**  and select  **Config.**  
+21. Click **Rules**.  
+22. Click **s3_bucket_public_write_prohibited**.  
+23. Click **Re-evaluate**.   
+24. You will need to refresh the screen.  Your bucket should be **Noncompliant**.  
 ![](/images/config_3.png)
-24. From the AWS console, click  **Services**  and select  **S3.**
-25. Click the bucket name. (Copied from CloudFormation Outputs previously.)
-26. Click on the **Permissions** tab.
-27. Click on **Access Control List**.  
-28. Under Public access, select **Everyone**.  
-29. Unheck **Write objects** in the pop up window.
-30. Click **Save**.  
+25. From the AWS console, click  **Services**  and select  **S3.**
+26. Click the bucket name. (Copied from CloudFormation Outputs previously.)
+27. Click on the **Permissions** tab.
+28. Click on **Access Control List**.  
+29. Under Public access, select **Everyone**.  
+30. Unheck **Write objects** in the pop up window.
+31. Click **Save**.  
 
 ## Exercise #7- Restrict Access to an IP Address
 
