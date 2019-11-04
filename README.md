@@ -64,6 +64,9 @@ In this workshop you will use IAM, S3 Bucket Policies, S3 Block Public Access an
 
 A new dialog box or tab on your browser should appear, providing you with a command line interface (CLI).  Keep this open - you will use the command line on the instance throughout this workshop.
 
+**Note:**  The SSH session will disconnect after a period of inactivity.  If you session becomes unresponsive, close the window and repeat the steps above to reconnect.
+
+
 ## Setup AWS CLI
 
 1. In the CLI for the instance, run the following commands to setup the AWS CLI
