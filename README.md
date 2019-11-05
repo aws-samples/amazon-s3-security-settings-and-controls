@@ -371,7 +371,7 @@ In this exercise we will configure a S3 VPC Endpoint and a bucket policy to limi
 ![](/images/config_6.png)
 4. Click **Next**.
 5. Click **Skip**.  
-6. Click **Confirm**.
+6. Click **Confirm**.  
 **Note**  
 If you receive an error regarding S3, AWS Config was used previously in another region.  Click **Previous**, **Previous**, under **Amazon S3 Bucket**, select **Choose a bucket from your account**.  Bucket name will start with config-bucket. Click **Next**, **Skip**, **Confirm**.  
 
