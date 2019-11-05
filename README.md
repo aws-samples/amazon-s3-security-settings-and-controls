@@ -262,10 +262,10 @@ The current bucket policy allows ACLs that are private but doesn't DENY anything
 11. Replace BUCKET NAME with the bucket name.  Sample bucket policy below.
   ![](/images/block_public_acl_2.png)
 12. Click **Save**
-13. Go to your SSH session, run the following command. Replace BUCKET_NAME with your bucket name.  The request should succeed since the default for an object ACL is private.  
+13. Go to your SSH session, run the following command. The request should succeed since the default for an object ACL is private.  
   $ aws s3api put-object --key text01 --body textfile --profile user1 --bucket ${bucket}
 14. Run the following command, the request should fail as the bucket policy will restrict the public-read ACL.  
-  $ aws s3api put-object --key text01 --body textfile --acl public-read --profile user1 –-bucket ${bucket}
+  $ aws s3api put-object --key text01 --body textfile --acl public-read --profile user1 --bucket ${bucket}
 
 ## Exercise #4- Configure S3 Block Public Access
 In this exercise we will configure S3 Block Public Access, an easy way to prevent public access to your bucket.
@@ -289,7 +289,7 @@ In this exercise we will configure S3 Block Public Access, an easy way to preven
 12. Go to your SSH session, run the following command. The request should succeed since the default for an object ACL is private.  
   $ aws s3api put-object --key text01 --body textfile --profile user1 --bucket ${bucket}  
 13. Run the following command, the request should fail as the bucket policy will restrict the public-read ACL.  
-  $ aws s3api put-object --key text01 --body textfile --acl public-read --profile user1 –-bucket ${bucket}  
+  $ aws s3api put-object --key text01 --body textfile --acl public-read --profile user1 --bucket ${bucket}  
 14. From the AWS console, click  **Services**  and select  **S3.**  
 15. Click the bucket name. (Copied from CloudFormation Outputs previously.)  
 16. Click on the **Permissions** tab.  
@@ -365,13 +365,17 @@ In this exercise we will configure a S3 VPC Endpoint and a bucket policy to limi
 ##  Exercise #6- Use AWS Config to Detect a Public Bucket  
 
 1. From the AWS console, click  **Services**  and select  **Config.**
-2. If you haven't used AWS Config previously you will be brought to the Get started page.  If you have already used AWS Config jump to step 6.
+2. If you haven't used AWS Config previously you will be brought to the Get started page.  If you have already used AWS Config jump to step
 ![](/images/config_4.png)
 3. Go to bottom of page, under AWS Config role, select **Use an existing AWS Config service-linked role**.  
 ![](/images/config_6.png)
 4. Click **Next**.
 5. Click **Skip**.  
-6. Click **Confirm**.      
+6. Click **Confirm**.
+**Note**  
+If you receive an error regarding S3, AWS Config was used previously in another region.  Click **Previous**, **Previous**, under **Amazon S3 Bucket**, select **Choose a bucket from your account**.  Bucket name will start with config-bucket. Click **Next**, **Skip**, **Confirm**.  
+
+![](/images/config_7.png)
 7. Click **Rules**.  
 8. Click **Add Rule**.
 9. Filter rules by typing **S3** into search box.  
