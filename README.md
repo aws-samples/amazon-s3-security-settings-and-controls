@@ -11,7 +11,7 @@ In this workshop you will use IAM, S3 Bucket Policies, S3 Block Public Access an
 
 ## Deploy AWS resources using CloudFormation
 
-1. Click one of the launch links in the table below to deploy the resources using CloudFormation.  To avoid errors during deployment, select a region in which you have previously created AWS resources.
+1. Click one of the launch links in the table below to deploy the resources using CloudFormation.  Use a control click or right click to open in a new tab to prevent losing your Github page.
 
   | **Region Code** | **Region Name** | **Launch** |
   | --- | --- | --- |
@@ -141,7 +141,7 @@ In this exercise we will create a S3 Bucket Policy that requires connections to 
 7. Click **Save**
 8. In your SSH session run the following command. The command should return a 403 error since the endpoint-url is HTTP.
 
-  $ aws s3api --endpoint-url http://s3.amazonaws.com --profile user1 head-object --key app1/file1 --bucket ${bucket}
+  $ aws s3api head-object --key app1/file1 --endpoint-url http://s3.amazonaws.com --profile user1 --bucket ${bucket}
 
 9. In your SSH session run the following command. This command should succeed since it is using HTTPS.
 
@@ -373,7 +373,7 @@ In this exercise we will configure a S3 VPC Endpoint and a bucket policy to limi
 5. Click **Skip**.  
 6. Click **Confirm**.  
 **Note**  
-If you receive an error regarding S3, AWS Config was used previously in another region.  Click **Previous**, **Previous**, under **Amazon S3 Bucket**, select **Choose a bucket from your account**.  Bucket name will start with config-bucket. Click **Next**, **Skip**, **Confirm**.  
+If you receive an error regarding S3, AWS Config was used previously in another region.  Click **Previous**, **Previous**, under **Amazon S3 Bucket**, select **Choose a bucket from your account**.  Bucket name will start with config-bucket. Click **Next**, click **Skip**, click **Confirm**.  
 
 ![](/images/config_7.png)
 7. Click **Rules**.  
@@ -402,7 +402,7 @@ If you receive an error regarding S3, AWS Config was used previously in another 
 27. Click on the **Permissions** tab.
 28. Click on **Access Control List**.  
 29. Under Public access, select **Everyone**.  
-30. Unheck **Write objects** in the pop up window.
+30. Uncheck **Write objects** in the pop up window.
 31. Click **Save**.  
 
 ## Exercise #7- Restrict Access to an IP Address
@@ -420,7 +420,7 @@ s3_security_lab_user2 should be able to read and write objects.
 To ensurer you don't continue to be billed for services in your account from this workshop follow the steps below to remove all resources created ruing the workshop.
 
 1. In your SSH session run the following command.  
-  $ aws s3 rm s3://${bucket} --recursive  
+  $ aws s3 rm s3://${bucket} --recursive  --profile user1
 2. From the AWS console, click  **Services**  and select  **Config.**  
 2. Click **Rules**.  
 3. Click **s3_bucket_public_write_prohibited**.
