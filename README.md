@@ -397,7 +397,7 @@ If you receive an error regarding S3, AWS Config was used previously in another 
 22. Click **Rules**.  
 23. Click **s3_bucket_public_write_prohibited**.  
 24. Click **Re-evaluate**.   
-25. You will need to refresh the screen.  Your bucket should be **Noncompliant**.  If everything is still compliant, wait a few minutes and Re-evaluate a second time.
+25. You will need to refresh the screen.  Your bucket should be **Noncompliant**.  If everything is still compliant, wait a few minutes and Re-evaluate a second time.  
 ![](/images/config_3.png)
 26. From the AWS console, click  **Services**  and select  **S3.**  
 27. Click the bucket name. (Copied from CloudFormation Outputs previously.)  
