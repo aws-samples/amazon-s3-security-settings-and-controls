@@ -291,11 +291,18 @@
                         "sudo yum update -y\n",
                         "AZ=`curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone`\n",
                         "REGION=${AZ::-1}\n",
-                        "BUCKET01=",
                         {
-                           "Ref":"bucket01"
+                           "Fn::Join":[
+                              "",
+                              [
+                                 "sudo echo export BUCKET01=",
+                                 {
+                                    "Ref":"bucket01"
+                                 },
+                                 " >> /etc/profile.d/script.sh\n"
+                              ]
+                           ]
                         },
-                        "\n",
                         "echo 'Instance01' | sudo tee -a  /proc/sys/kernel/hostname\n",
                         "aws s3api put-object --bucket $BUCKET01 --key app1/file1 --body /var/log/messages\n",
                         "aws s3api put-object --bucket $BUCKET01 --key app1/file2 --body /var/log/messages\n",
