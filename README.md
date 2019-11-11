@@ -385,7 +385,7 @@ If you receive an error regarding S3, AWS Config was used previously in another 
 12. Click **Rules**, in the left pane.
 13. The rule needs time to evaluate.  Refresh the page until you see **Compliant**.  
 ![](/images/config_5.png)
-14. From the AWS console, click  **Services**  and select  **S3.**
+14. From the AWS console, click  **Services**  and select  **S3.**  
 15. Click the bucket name. (Copied from CloudFormation Outputs previously.)  
 16. Click on the **Permissions** tab.  
 17. Click on **Access Control List**.  
