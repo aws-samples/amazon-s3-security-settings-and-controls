@@ -399,13 +399,13 @@ If you receive an error regarding S3, AWS Config was used previously in another 
 24. Click **Re-evaluate**.   
 25. You will need to refresh the screen.  Your bucket should be **Noncompliant**.  
 ![](/images/config_3.png)
-26. From the AWS console, click  **Services**  and select  **S3.**
-27. Click the bucket name. (Copied from CloudFormation Outputs previously.)
-28. Click on the **Permissions** tab.
-29. Click on **Access Control List**.  
-30. Under Public access, select **Everyone**.  
-31. Uncheck **Write objects** in the pop up window.
-32. Click **Save**.  
+26. From the AWS console, click  **Services**  and select  **S3.**  
+27. Click the bucket name. (Copied from CloudFormation Outputs previously.)  
+28. Click on the **Permissions** tab.  
+29. Click on **Access Control List**.   
+30. Under Public access, select **Everyone**.   
+31. Uncheck **Write objects** in the pop up window.  
+32. Click **Save**.   
 
 ## Exercise #7- Restrict Access to an IP Address
 
