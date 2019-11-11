@@ -382,29 +382,30 @@ If you receive an error regarding S3, AWS Config was used previously in another 
 9. Filter rules by typing **S3** into search box.  
 10. Click **s3_bucket_public_write_prohibited**.  
 11. Click **Next**,**Confirm**.  
-12. The rule needs time to evaluate.  Refresh the page until you see **Compliant**.  
+12. Click **Rules**, in the left pane.
+13. The rule needs time to evaluate.  Refresh the page until you see **Compliant**.  
 ![](/images/config_5.png)
-13. From the AWS console, click  **Services**  and select  **S3.**
-14. Click the bucket name. (Copied from CloudFormation Outputs previously.)
-15. Click on the **Permissions** tab.
-16. Click on **Access Control List**.  
-17. Under Public access, select **Everyone**.  
-18. Check **Write objects** in the pop up window.
-19. Click **Save**.  
+14. From the AWS console, click  **Services**  and select  **S3.**
+15. Click the bucket name. (Copied from CloudFormation Outputs previously.)  
+16. Click on the **Permissions** tab.  
+17. Click on **Access Control List**.  
+18. Under Public access, select **Everyone**.  
+19. Check **Write objects** in the pop up window.  
+20. Click **Save**.  
 ![](/images/config_2.png)  
-20. From the AWS console, click  **Services**  and select  **Config.**  
-21. Click **Rules**.  
-22. Click **s3_bucket_public_write_prohibited**.  
-23. Click **Re-evaluate**.   
-24. You will need to refresh the screen.  Your bucket should be **Noncompliant**.  
+21. From the AWS console, click  **Services**  and select  **Config.**  
+22. Click **Rules**.  
+23. Click **s3_bucket_public_write_prohibited**.  
+24. Click **Re-evaluate**.   
+25. You will need to refresh the screen.  Your bucket should be **Noncompliant**.  
 ![](/images/config_3.png)
-25. From the AWS console, click  **Services**  and select  **S3.**
-26. Click the bucket name. (Copied from CloudFormation Outputs previously.)
-27. Click on the **Permissions** tab.
-28. Click on **Access Control List**.  
-29. Under Public access, select **Everyone**.  
-30. Uncheck **Write objects** in the pop up window.
-31. Click **Save**.  
+26. From the AWS console, click  **Services**  and select  **S3.**
+27. Click the bucket name. (Copied from CloudFormation Outputs previously.)
+28. Click on the **Permissions** tab.
+29. Click on **Access Control List**.  
+30. Under Public access, select **Everyone**.  
+31. Uncheck **Write objects** in the pop up window.
+32. Click **Save**.  
 
 ## Exercise #7- Restrict Access to an IP Address
 
