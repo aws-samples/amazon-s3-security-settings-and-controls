@@ -367,15 +367,16 @@ In this exercise we will configure a S3 VPC Endpoint and a bucket policy to limi
 1. From the AWS console, click  **Services**  and select  **Config.**
 2. If you haven't used AWS Config previously you will be brought to the Get started page.  If you have already used AWS Config jump to step
 ![](/images/config_4.png)
-3. Go to bottom of page, under AWS Config role, select **Use an existing AWS Config service-linked role**.  
-![](/images/config_6.png)
+3. Go to bottom of page, under AWS Config role, select **Create AWS Config service-linked role**.  If you have already used AWS Config in another region, instead select **Use an existing AWS Config service-linked role**.  
+
+  ![](/images/config_6.png)
 4. Click **Next**.
 5. Click **Skip**.  
 6. Click **Confirm**.  
 **Note**  
 If you receive an error regarding S3, AWS Config was used previously in another region.  Click **Previous**, **Previous**, under **Amazon S3 Bucket**, select **Choose a bucket from your account**.  Bucket name will start with config-bucket. Click **Next**, click **Skip**, click **Confirm**.  
 
-![](/images/config_7.png)
+  ![](/images/config_7.png)
 7. Click **Rules**.  
 8. Click **Add Rule**.
 9. Filter rules by typing **S3** into search box.  
