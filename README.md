@@ -382,7 +382,7 @@ If you receive an error regarding S3, AWS Config was used previously in another 
 9. Filter rules by typing **S3** into search box.  
 10. Click **s3_bucket_public_write_prohibited**.  
 11. Click **Next**,**Confirm**.  
-12. Click **Rules**, in the left pane.
+12. Click **Rules**, in the left pane.  
 13. The rule needs time to evaluate.  Refresh the page until you see **Compliant**.  
 ![](/images/config_5.png)
 14. From the AWS console, click  **Services**  and select  **S3.**  
