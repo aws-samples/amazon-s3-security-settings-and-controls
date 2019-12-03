@@ -213,7 +213,7 @@ In this exercise we will create a S3 Bucket Policy that prevents users from assi
                 "s3:PutObject",
                 "s3:PutObjectAcl"
             ],
-            "Resource": "arn:aws:s3:::BUCKET NAME/*",
+            "Resource": "arn:aws:s3:::BUCKET_NAME/*",
             "Condition": {
                 "StringEquals": {
                     "s3:x-amz-acl": "private"
@@ -245,7 +245,7 @@ The current bucket policy allows ACLs that are private but doesn't DENY anything
                     "s3:PutObject",
                     "s3:PutObjectAcl"
                     ],
-            "Resource": "arn:aws:s3:::BUCKET NAME/*",
+            "Resource": "arn:aws:s3:::BUCKET_NAME/*",
             "Condition": {
                 "StringEquals": {
                     "s3:x-amz-acl": [
