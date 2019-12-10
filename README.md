@@ -71,16 +71,18 @@ A new dialog box or tab on your browser should appear, providing you with a comm
 
 1. In the CLI for the instance, run the following commands to setup the AWS CLI
 
-    $ aws configure
-
-    Leave Access Key and Secret Key blank, set the region to the region you deployed your CloudFormation template in , output format leave default.
+```
+$ aws configure
+```
+Leave Access Key and Secret Key blank, set the region to the region you deployed your CloudFormation template in , output format leave default.
 
   ![](/images/aws_configure.png)  
 
 2. Create a credentials file to be used by the AWS CLI.  This will allow you to switch between two different users easily.  
-
-    $ cd ~/.aws  
-    $ vi credentials  
+```
+$ cd ~/.aws  
+$ vi credentials  
+```
 Copy and paste the following credentials file template into your vi session.
 ```
 [user1]
@@ -140,12 +142,13 @@ In this exercise we will create a S3 Bucket Policy that requires connections to 
 
 7. Click **Save**
 8. In your SSH session run the following command. The command should return a 403 error since the endpoint-url is HTTP.
-
-    $ aws s3api head-object --key app1/file1 --endpoint-url ht<span>tp://s3.amazonaws.com --profile user1 --bucket ${bucket}
-
+```
+$ aws s3api head-object --key app1/file1 --endpoint-url ht<span>tp://s3.amazonaws.com --profile user1 --bucket ${bucket}
+```
 9. In your SSH session run the following command. This command should succeed since it is using HTTPS.
-
-    $ aws s3api --endpoint-url ht<span>tps://s3.amazonaws.com --profile user1 head-object --key app1/file1 --bucket ${bucket}
+```
+$ aws s3api --endpoint-url ht<span>tps://s3.amazonaws.com --profile user1 head-object --key app1/file1 --bucket ${bucket}
+```
 
 ## Exercise #2- Require SSE-S3 Encryption
 
@@ -179,12 +182,18 @@ In this exercise we will create a S3 Bucket Policy that requires data at rest en
   ![](/images/sse_s3_bucket_policy.png)   
 8. Click **Save**  
 9. Go to your SSH session and create a small text file using the following command.
-   $ cd ~  
-  $ echo "123456789abcdefg" > textfile  
+```
+$ cd ~  
+$ echo "123456789abcdefg" > textfile  
+```
 10. Attempt to PUT an object without encryption. The request should fail.
-  $ aws s3api put-object --key text01 --body textfile --profile user1 --bucket ${bucket}  
+```
+$ aws s3api put-object --key text01 --body textfile --profile user1 --bucket ${bucket}
+```
 11. PUT an object using SSE-S3.  The request should succeed.
-  $  aws s3api put-object --key text01 --body textfile --server-side-encryption AES256 --profile user1 --bucket ${bucket}  
+```
+$  aws s3api put-object --key text01 --body textfile --server-side-encryption AES256 --profile user1 --bucket ${bucket} 
+```
 12. From the AWS console, click  **Services**  and select  **S3.**  
 13. Click the bucket name. (Copied from CloudFormation Outputs previously.)  
 14. Click on the **Properties** tab.    
@@ -227,10 +236,13 @@ In this exercise we will create a S3 Bucket Policy that prevents users from assi
   ![](/images/block_public_acl_1.png)
 8. Click **Save**  
 9. Go to your SSH session, run the following command. The request should succeed since the default for an object ACL is private.  
-  $ aws s3api put-object --key text01 --body textfile --profile user1 --bucket ${bucket}  
+```
+$ aws s3api put-object --key text01 --body textfile --profile user1 --bucket ${bucket}  
+```
 10. Run the following command, the request will also succeed even though this isn’t the behavior we are expecting.  
-  $ aws s3api put-object --key text01 --body textfile --acl public-read --profile user1 --bucket ${bucket}  
-
+```
+$ aws s3api put-object --key text01 --body textfile --acl public-read --profile user1 --bucket ${bucket}  
+```
 **Note**  
 The current bucket policy allows ACLs that are private but doesn't DENY anything.  It is important to write policies that prevent actions, not allow it when trying to restrict actions against a bucket. The current bucket policy also allows Public access to the bucket unintentionally due to the principal being a wildcard.  
 
@@ -263,10 +275,13 @@ The current bucket policy allows ACLs that are private but doesn't DENY anything
   ![](/images/block_public_acl_2.png)
 12. Click **Save**
 13. Go to your SSH session, run the following command. The request should succeed since the default for an object ACL is private.  
-  $ aws s3api put-object --key text01 --body textfile --profile user1 --bucket ${bucket}
+```
+$ aws s3api put-object --key text01 --body textfile --profile user1 --bucket ${bucket}
+```
 14. Run the following command, the request should fail as the bucket policy will restrict the public-read ACL.  
-  $ aws s3api put-object --key text01 --body textfile --acl public-read --profile user1 --bucket ${bucket}
-
+```
+$ aws s3api put-object --key text01 --body textfile --acl public-read --profile user1 --bucket ${bucket}
+```
 ## Exercise #4- Configure S3 Block Public Access
 In this exercise we will configure S3 Block Public Access, an easy way to prevent public access to your bucket.
 
@@ -286,10 +301,14 @@ In this exercise we will configure S3 Block Public Access, an easy way to preven
 
 10. Type **confirm**  
 11. Click **Confirm**  
-12. Go to your SSH session, run the following command. The request should succeed since the default for an object ACL is private.  
-  $ aws s3api put-object --key text01 --body textfile --profile user1 --bucket ${bucket}  
+12. Go to your SSH session, run the following command. The request should succeed since the default for an object ACL is private.
+```
+$ aws s3api put-object --key text01 --body textfile --profile user1 --bucket ${bucket}  
+```
 13. Run the following command, the request should fail as the bucket policy will restrict the public-read ACL.  
-  $ aws s3api put-object --key text01 --body textfile --acl public-read --profile user1 --bucket ${bucket}  
+```
+$ aws s3api put-object --key text01 --body textfile --acl public-read --profile user1 --bucket ${bucket}  
+```
 14. From the AWS console, click  **Services**  and select  **S3.**  
 15. Click the bucket name. (Copied from CloudFormation Outputs previously.)  
 16. Click on the **Permissions** tab.  
@@ -347,7 +366,9 @@ In this exercise we will configure a S3 VPC Endpoint and a bucket policy to limi
 ![](/images/vpc_endpoint_6.png)
 17. Click **Save**
 18. Go to your SSH session, the request will fail since the S3 VPCE isn't associated with a route table.  
-  $ aws s3api head-object --key app1/file1 --profile user1 --bucket ${bucket}
+```
+$ aws s3api head-object --key app1/file1 --profile user1 --bucket ${bucket}
+```
 19. In the AWS Console go to **VPC**.  
 20. Click **Endpoints**.  
 21. The VPC Endpoint should be selected.  Select **Actions**, then click **Manage Route Tables**.
@@ -355,7 +376,9 @@ In this exercise we will configure a S3 VPC Endpoint and a bucket policy to limi
 ![](/images/vpc_endpoint_7.png)
 23. Click **Modify Route Tables**
 24. Go to your SSH session, run the following command. The request should now succeed.  
-  $ aws s3api head-object --key app1/file1 --profile user1 --bucket ${bucket}
+``` 
+$ aws s3api head-object --key app1/file1 --profile user1 --bucket ${bucket}
+```
 25. From the AWS console, click  **Services**  and select  **S3.**
 26. Click the bucket name. (Copied from CloudFormation Outputs previously.)
 27. Click on the **Permissions** tab.  
@@ -422,7 +445,9 @@ s3_security_lab_user2 should be able to read and write objects.
 To ensurer you don't continue to be billed for services in your account from this workshop follow the steps below to remove all resources created ruing the workshop.
 
 1. In your SSH session run the following command.  
+```
   $ aws s3 rm s3://${bucket} --recursive  --profile user1
+```
 2. From the AWS console, click  **Services**  and select  **Config.**  
 2. Click **Rules**.  
 3. Click **s3_bucket_public_write_prohibited**.
