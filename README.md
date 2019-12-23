@@ -432,14 +432,16 @@ If you receive an error regarding S3, AWS Config was used previously in another 
 
 ## Exercise #7- Restrict Access to an IP Address
 
-Create a S3 Bucket Policy that will restrict access to your S3 Bucket to only the IP address of the EC2 Instance.
+Create a S3 Bucket Policy that will restrict access to your S3 Bucket to only the IP address of the EC2 Instance.  
 
+This is intended to be self lead.  Use the following documentation for help, https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html  
 ## Exercise #8- Restrict Access to an IP Address and User Restrictions
 
 Add to your S3 Bucket Policy from Exercise #7.  
 s3_security_lab_user1 should only be able to read objects.  
 s3_security_lab_user2 should be able to read and write objects.  
 
+This is intended to be self lead.  Use the following documentation for help, https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html
 ## Clean Up Resources
 
 To ensurer you don't continue to be billed for services in your account from this workshop follow the steps below to remove all resources created ruing the workshop.
