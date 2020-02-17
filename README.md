@@ -142,7 +142,7 @@ In this exercise we will create a S3 Bucket Policy that requires connections to 
 7. Click **Save**
 8. In your SSH session run the following command. The command should return a 403 error since the endpoint-url is HTTP.
 
-    aws s3api head-object --key app1/file1 --endpoint-url ht<span>tp//s3.amazonaws.com --profile user1 --bucket ${bucket}
+    aws s3api head-object --key app1/file1 --endpoint-url ht<span>tp://s3.amazonaws.com --profile user1 --bucket ${bucket}
 
 
 9. In your SSH session run the following command. This command should succeed since it is using HTTPS.
